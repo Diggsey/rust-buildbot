@@ -53,56 +53,56 @@ print
 # These are the platforms we produce compilers for
 host_list = sorted([
     "x86_64-unknown-linux-gnu",
-    "i686-unknown-linux-gnu",
-    "x86_64-pc-windows-gnu",
-    "i686-pc-windows-gnu",
-    "x86_64-pc-windows-msvc",
-    "i686-pc-windows-msvc",
-    "x86_64-apple-darwin",
-    "i686-apple-darwin",
-    "x86_64-unknown-freebsd",
-    "x86_64-unknown-netbsd",
-    "arm-unknown-linux-gnueabi",
-    "arm-unknown-linux-gnueabihf",
-    "armv7-unknown-linux-gnueabihf",
-    "aarch64-unknown-linux-gnu",
+    # "i686-unknown-linux-gnu",
+    # "x86_64-pc-windows-gnu",
+    # "i686-pc-windows-gnu",
+    # "x86_64-pc-windows-msvc",
+    # "i686-pc-windows-msvc",
+    # "x86_64-apple-darwin",
+    # "i686-apple-darwin",
+    # "x86_64-unknown-freebsd",
+    # "x86_64-unknown-netbsd",
+    # "arm-unknown-linux-gnueabi",
+    # "arm-unknown-linux-gnueabihf",
+    # "armv7-unknown-linux-gnueabihf",
+    # "aarch64-unknown-linux-gnu",
 ])
 
 # These are the platforms we produce standard libraries for
 target_list = sorted([
-    "aarch64-apple-ios",
-    "aarch64-unknown-linux-gnu",
-    "arm-linux-androideabi",
-    "arm-unknown-linux-gnueabi",
-    "arm-unknown-linux-gnueabihf",
-    "armv7-apple-ios",
-    "armv7-unknown-linux-gnueabihf",
-    "armv7s-apple-ios",
-    "i386-apple-ios",
-    "i686-apple-darwin",
-    "i686-pc-windows-gnu",
-    "i686-pc-windows-msvc",
-    "i686-unknown-freebsd",
-    "i586-pc-windows-msvc",
-    "i686-unknown-linux-gnu",
-    "i686-unknown-linux-musl",
-    "i586-unknown-linux-gnu",
-    "mips-unknown-linux-musl",
-    "mipsel-unknown-linux-musl",
-    "mips-unknown-linux-gnu",
-    "mipsel-unknown-linux-gnu",
-    "powerpc-unknown-linux-gnu",
-    "powerpc64-unknown-linux-gnu",
-    "powerpc64le-unknown-linux-gnu",
-    "x86_64-apple-darwin",
-    "x86_64-apple-ios",
-    "x86_64-pc-windows-gnu",
-    "x86_64-pc-windows-msvc",
-    "x86_64-rumprun-netbsd",
-    "x86_64-unknown-freebsd",
+    # "aarch64-apple-ios",
+    # "aarch64-unknown-linux-gnu",
+    # "arm-linux-androideabi",
+    # "arm-unknown-linux-gnueabi",
+    # "arm-unknown-linux-gnueabihf",
+    # "armv7-apple-ios",
+    # "armv7-unknown-linux-gnueabihf",
+    # "armv7s-apple-ios",
+    # "i386-apple-ios",
+    # "i686-apple-darwin",
+    # "i686-pc-windows-gnu",
+    # "i686-pc-windows-msvc",
+    # "i686-unknown-freebsd",
+    # "i586-pc-windows-msvc",
+    # "i686-unknown-linux-gnu",
+    # "i686-unknown-linux-musl",
+    # "i586-unknown-linux-gnu",
+    # "mips-unknown-linux-musl",
+    # "mipsel-unknown-linux-musl",
+    # "mips-unknown-linux-gnu",
+    # "mipsel-unknown-linux-gnu",
+    # "powerpc-unknown-linux-gnu",
+    # "powerpc64-unknown-linux-gnu",
+    # "powerpc64le-unknown-linux-gnu",
+    # "x86_64-apple-darwin",
+    # "x86_64-apple-ios",
+    # "x86_64-pc-windows-gnu",
+    # "x86_64-pc-windows-msvc",
+    # "x86_64-rumprun-netbsd",
+    # "x86_64-unknown-freebsd",
     "x86_64-unknown-linux-gnu",
-    "x86_64-unknown-linux-musl",
-    "x86_64-unknown-netbsd",
+    # "x86_64-unknown-linux-musl",
+    # "x86_64-unknown-netbsd",
 ])
 
 # windows-gnu platforms require an extra bundle of gnu stuff
@@ -114,9 +114,9 @@ mingw_list = sorted([
 # This file defines which cargos go with which rustc on beta/stable
 cargo_revs = "https://raw.githubusercontent.com/rust-lang/rust-packaging/master/cargo-revs.txt"
 
-if os.path.isdir(temp_dir):
-    shutil.rmtree(temp_dir)
-os.mkdir(temp_dir)
+# if os.path.isdir(temp_dir):
+#     shutil.rmtree(temp_dir)
+# os.mkdir(temp_dir)
 
 def main():
     # First figure out the distribution archive dates for the rustc
@@ -196,17 +196,17 @@ def version_from_channel(channel, component, date):
     # Download the installer
     installer_url = s3_addy + "/" + dist + "/" + date + "/" + installer_name
     print "downloading " + installer_url
-    response = urllib2.urlopen(installer_url)
-    if response.getcode() != 200:
-        raise Exception("couldn't download " + installer_url)
+    # response = urllib2.urlopen(installer_url)
+    # if response.getcode() != 200:
+    #     raise Exception("couldn't download " + installer_url)
 
     installer_file = temp_dir + "/" + installer_name
-    f = open(installer_file, "w")
-    while True:
-        buf = response.read(4096)
-        if not buf: break
-        f.write(buf)
-    f.close()
+    # f = open(installer_file, "w")
+    # while True:
+    #     buf = response.read(4096)
+    #     if not buf: break
+    #     f.write(buf)
+    # f.close()
 
     # Unpack the installer
     unpack_dir = temp_dir + "/unpack"
@@ -221,7 +221,7 @@ def version_from_channel(channel, component, date):
         version = f.read().strip()
 
     shutil.rmtree(unpack_dir)
-    os.remove(installer_file)
+    # os.remove(installer_file)
 
     return version
 
